@@ -1,0 +1,1 @@
+สร้างเหมือน &lt;prompt&gt; แต่ไม่ต้องใช้ &lt;prompt&gt;

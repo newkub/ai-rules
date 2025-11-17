@@ -1,0 +1,22 @@
+{
+  "name": "file-transformer-cli",
+  "version": "1.0.0",
+  "description": "CLI tool to transform files from .qoder/rules to cli format",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "bun src/index.ts",
+    "test": "vitest --run"
+  },
+  "keywords": ["cli", "file-transform", "markdown"],
+  "author": "Qoder IDE",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.1",
+    "vitest": "^0.34.0",
+    "tsdown": "latest"
+  }
+}

@@ -1,0 +1,47 @@
+# Dependencies
+node_modules
+.bun
+
+# Build outputs
+dist
+.out
+build
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Test coverage
+coverage
+
+# Typescript cache
+*.tsbuildinfo
+
+# Output directories
+cli/output
+.qoder/rules
+
+# Temporary files
+tmp
+temp
