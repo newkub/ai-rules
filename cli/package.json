@@ -1,22 +1,37 @@
 {
-  "name": "file-transformer-cli",
+  "name": "@ai-rules/cli",
   "version": "1.0.0",
   "description": "CLI tool to transform files from .qoder/rules to cli format",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./dist/index.mjs",
+  "bin": {
+    "ai-rules": "./src/index.ts"
+  },
   "scripts": {
-    "build": "tsdown",
-    "dev": "bun src/index.ts",
+    "build": "tsdown --exports",
+    "dev": "bun --watch src/index.ts",
     "test": "vitest --run"
   },
-  "keywords": ["cli", "file-transform", "markdown"],
+  "keywords": [
+    "cli",
+    "file-transform",
+    "markdown"
+  ],
   "author": "Qoder IDE",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@clack/prompts": "^0.7.0"
+  },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "ts-node": "^10.9.1",
     "vitest": "^0.34.0",
     "tsdown": "latest"
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
   }
 }
