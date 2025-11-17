@@ -1,6 +1,8 @@
 import { select, confirm, cancel, isCancel, text } from '@clack/prompts';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { writeFile, mkdir } from 'fs/promises';
+import { join } from 'path';
 
 const execPromise = promisify(exec);
 
@@ -9,7 +11,7 @@ export async function handleAdd() {
   
   // Get input for files to place
   const filesToPlace = await text({
-    message: 'Enter the files to place (comma-separated):',
+    message: 'Enter the files to place (comma-separated, filenames only):',
     placeholder: 'file1.md,file2.md',
   });
   
@@ -18,7 +20,30 @@ export async function handleAdd() {
     process.exit(0);
   }
   
-  console.log(`Placing files: ${filesToPlace} in '${targetDir}' directory...`);
+  // Split the files and place them
+  const fileArray = filesToPlace.split(',').map(file => file.trim());
+  
+  try {
+    for (const fileInput of fileArray) {
+      // Extract just the filename if a full path is provided
+      const fileName = fileInput.includes('\\') || fileInput.includes('/') ? 
+        fileInput.split(/\\|\//).pop() || fileInput : 
+        fileInput;
+      
+      const filePath = join(targetDir, fileName);
+      // Create a simple placeholder content for the file
+      const content = `# ${fileName.replace('.md', '')}
+
+This is a new file added via the CLI.`;
+      await writeFile(filePath, content, 'utf-8');
+      console.log(`Created file: ${filePath}`);
+    }
+  } catch (error) {
+    console.error('Error placing files:', error);
+    process.exit(1);
+  }
+  
+  console.log(`Successfully placed ${fileArray.length} files in '${targetDir}' directory.`);
   
   // Ask if user wants to commit to GitHub repository
   const shouldCommit = await confirm({
